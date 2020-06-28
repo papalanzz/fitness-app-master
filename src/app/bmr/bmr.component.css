@@ -1,0 +1,12 @@
+label{
+  text-align: left;
+}
+hr {
+  width:60%;
+}
+input{
+}
+.error {
+  color: red;
+  text-decoration: underline;
+}

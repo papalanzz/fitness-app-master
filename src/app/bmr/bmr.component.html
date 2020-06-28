@@ -1,0 +1,126 @@
+<h1 style="text-align: center; font-weight: bolder">BMR Calculator</h1>
+<h4 style="text-align: center">Using
+  <a href="https://www.bmi-calculator.net/bmr-calculator/bmr-formula.php"
+     target="_blank">Harrison-Benedict Equation</a>
+</h4>
+<h2 *ngIf="userForm.valid" style="text-align: center">
+  {{userForm.get('name').value | titlecase }}'s BMR is  {{determineBMR()}} kcals/day
+</h2>
+
+<form novalidate [formGroup]="userForm">
+
+  <div class="p-grid p-justify-center">
+    <div class="p-col-4">
+      <h3><strong>Inputs</strong></h3>
+    </div>
+    <div class="p-col-4">
+      <h3><strong>User Profile</strong></h3>
+    </div>
+  </div>
+  <hr>
+
+  <div class="p-grid p-justify-center ">
+    <div class="p-col-4 ">
+      <label for="nameId"><strong>Name: </strong></label>
+      <input type="text"
+             formControlName="name"
+             id="nameId">
+
+    <span class="error">
+      {{errorMessages['name']}}
+    </span>
+    </div>
+
+    <div class="p-col-4">
+      User Name: <strong>{{userForm.get('name').value}}</strong>
+    </div>
+  </div>
+  <hr>
+
+  <div class="p-grid p-justify-center">
+    <div class="p-col-4">
+      <label for="ageId"><strong>Age: </strong></label>
+      <input type="number"
+             formControlName="age"
+             id="ageId">
+      <span class="error">
+      {{errorMessages['age']}}
+    </span>
+    </div>
+    <div class="p-col-4">
+      User Age: <strong>{{userForm.get('age').value}}</strong>
+    </div>
+  </div>
+  <hr>
+
+  <div class="p-grid p-justify-center">
+    <div class="p-col-4">
+      <label><strong>Gender: </strong></label>
+      <p-selectButton [options]="genders"
+                      type="text"
+                      formControlName="gender">
+      </p-selectButton>
+      <span class="error">
+      {{errorMessages['gender']}}
+    </span>
+    </div>
+    <div class="p-col-4">
+      Gender: <strong>{{userForm.get('gender').value}}</strong>
+    </div>
+  </div>
+  <hr>
+
+  <div class="p-grid p-justify-center">
+    <div class="p-col-4">
+      <label for="heightId"><strong>Height(inches): </strong></label>
+      <input type="number"
+             formControlName="height"
+             id="heightId">
+      <span class="error">
+      {{errorMessages['height']}}
+    </span>
+    </div>
+    <div class="p-col-4">
+      User Height: <strong>{{userForm.get('height').value}}</strong> inches
+    </div>
+  </div>
+  <hr>
+
+  <div class="p-grid p-justify-center">
+    <div class="p-col-4">
+      <label for="weightId"><strong>Weight(lbs): </strong></label>
+      <input type="number"
+             formControlName="weight"
+             id="weightId">
+      <span class="error">
+      {{errorMessages['weight']}}
+    </span>
+    </div>
+    <div class="p-col-4">
+      User Weight: <strong>{{userForm.get('weight').value}}</strong> lbs
+    </div>
+  </div>
+  <hr>
+
+  <div class="p-grid p-justify-center">
+    <div class="p-col-4">
+      <label><strong>Activity Level: </strong></label>
+      <p-selectButton [options]="activityLevels"
+                      formControlName="activityLevel">
+      </p-selectButton>
+      <span class="error">
+      {{errorMessages['activityLevel']}}
+    </span>
+    </div>
+    <div class="p-col-4">
+      <strong>Description:</strong><br>
+      <span style="padding-left: 2em">- {{printDescription(userForm.get('activityLevel').value)}}</span> <br>
+      <strong>BMR Multiplier factor: </strong>{{userForm.get('activityLevel').value}}
+    </div>
+  </div>
+  <hr>
+  <br>Dirty: {{ userForm.dirty }}
+  <br>Touched: {{ userForm.touched }}
+  <br>Valid: {{ userForm.valid }}
+  <br>Value: {{ userForm.value | json }}
+</form>
